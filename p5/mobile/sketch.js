@@ -42,7 +42,7 @@ function draw() {
 
  function playerJump()
  {
-   var jump = createVector(0,-3);
+   var jump = createVector(0,-1);
    person.applyForce(jump);
    isJump=false;
  }
