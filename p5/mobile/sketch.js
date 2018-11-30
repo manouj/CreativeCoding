@@ -4,6 +4,7 @@ var accChangeX = 0;
 var accChangeY = 0;
 var accChangeT = 0;
 var player;
+var isJump;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -11,6 +12,7 @@ person = new Person();
   for (var i=0; i<20; i++) {
     balls.push(new Ball());
   }
+  isJump=false;
 }
 
 function draw() {
@@ -31,7 +33,18 @@ function draw() {
   var gravity = createVector(0,0.8);
   person.applyForce(gravity);
 
+  if(isJump==true)
+  {
+    playerJump();
+  }
 
+ }
+
+ function playerJump()
+ {
+   var jump = createVector(0,-3);
+   person.applyForce(jump);
+   isJump=false;
  }
 
  function keyPressed()
@@ -152,8 +165,7 @@ function checkForShake() {
     for (var i=0; i<balls.length; i++) {
       balls[i].shake();
       balls[i].turn();
-      var jump = createVector(0,-2);
-      person.applyForce(jump);
+    isJump=true;
     }
   }
   // If not shake
