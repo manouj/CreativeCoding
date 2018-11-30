@@ -19,7 +19,7 @@ function draw() {
     balls[i].move();
     balls[i].display();
   }
-  rect(0,windowHeight,windowWidth,200 );
+  rect(0,windowHeight-200,windowWidth,200 );
   checkForShake();
 
  }
