@@ -30,7 +30,7 @@ function draw() {
   person.display();
   checkForShake();
 
-  var gravity = createVector(0,2);
+  var gravity = createVector(0,0.5);
   person.applyForce(gravity);
 
   if(isJump==true)
@@ -42,7 +42,7 @@ function draw() {
 
  function playerJump()
  {
-   var jump = createVector(0,-5);
+   var jump = createVector(0,-20);
    person.applyForce(jump);
    isJump=false;
  }
