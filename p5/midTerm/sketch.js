@@ -11,7 +11,6 @@ function setup() {
   createCanvas(1600, 700);
   // Create liquid object
   liquid = new Liquid(0, height / 2, width, height / 2, 0.1);
-
   particle1 = new Particle(1, 200, 0);
   particle2 = new Particle(3, 400, 0);
 }

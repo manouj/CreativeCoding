@@ -3,10 +3,11 @@ var threshold = 30;
 var accChangeX = 0;
 var accChangeY = 0;
 var accChangeT = 0;
+var player;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-
+person = new Person();
   for (var i=0; i<20; i++) {
     balls.push(new Ball());
   }
@@ -14,6 +15,9 @@ function setup() {
 
 function draw() {
   background(0);
+  person.update();
+  person.edges();
+  person.display();
 
   for (var i=0; i<balls.length; i++) {
     balls[i].move();
@@ -23,6 +27,42 @@ function draw() {
   checkForShake();
 
  }
+
+//player
+function Person(x, y) {
+  this.pos = createVector(200, 380);
+  this.vel = createVector(0, 0);
+  this.acc = createVector(0, 0);
+  this.applyForce = function(force) {
+  this.acc.add(force);
+  }
+
+  this.update = function() {
+    this.vel.add(this.acc);
+    this.pos.add(this.vel);
+    this.acc.set(0, 0);
+  }
+
+  this.display = function() {
+    fill("blue");
+    // image(selectedPlayer,this.pos.x,this.pos.y-80,80,80);
+    rect(30,windowHeight-250,20,50);
+
+  }
+
+  this.edges = function() {
+    if (this.pos.y > 380) {
+      this.vel.y *= 0;
+      this.pos.y = 380;
+    }
+
+    if (this.pos.y < 50) {
+      this.vel.y *= 0;
+      this.pos.y = 50;
+    }
+  }
+}
+
 
 // Ball class
 function Ball() {
@@ -98,6 +138,7 @@ function checkForShake() {
     for (var i=0; i<balls.length; i++) {
       balls[i].shake();
       balls[i].turn();
+      person.applyForce(jump);
     }
   }
   // If not shake
