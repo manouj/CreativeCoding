@@ -5,16 +5,25 @@ var accChangeY = 0;
 var accChangeT = 0;
 var player;
 var isJump;
+var interval = 2000;
+var prevMillis = 0;
+var hit = false;
+var isHit=false;
+var obstacles=[];
 
 
-
-function setup() {
+function setup()
+ {
   createCanvas(windowWidth, windowHeight);
 person = new Person();
   for (var i=0; i<20; i++) {
     balls.push(new Ball());
   }
+
+
+
   isJump=false;
+
 }
 
 function draw() {
@@ -24,13 +33,34 @@ function draw() {
     balls[i].display();
   }
 
+
+
   rect(0,windowHeight-200,windowWidth,200 );
   person.update();
   person.edges();
   person.display();
+
+  if(millis() - prevMillis >interval && obstacles.length<=5)
+  {
+    obstacles.push(new Obstacles());
+    prevMillis = millis();
+  }
+
+  for(var j=0; j< obstacles.length; j++)
+  {
+    obstacles[j].display();
+    obstacles[j].update();
+    obstacles[j].collide(person);
+    hit = collideRectRect(obstacles[j].x,obstacles[j].y,40,obstacles[j].height,mouseX,mouseY,75,75);
+  }
+console.log(hit);
+
+
+
+
   checkForShake();
 
-  var gravity = createVector(0,0.5);
+  var gravity = createVector(0,2);
   person.applyForce(gravity);
 
   if(isJump==true)
@@ -42,7 +72,7 @@ function draw() {
 
  function playerJump()
  {
-   var jump = createVector(0,-20);
+   var jump = createVector(0,-40);
    person.applyForce(jump);
    isJump=false;
  }
@@ -50,8 +80,7 @@ function draw() {
  function keyPressed()
  {
    if (key=='q') {
-
-       var jump = createVector(0,-20);
+       var jump = createVector(0,-40);
        person.applyForce(jump);
      }
 }
@@ -68,6 +97,7 @@ function Person(x, y) {
     this.vel.add(this.acc);
     this.pos.add(this.vel);
     this.acc.set(0, 0);
+
   }
 
   this.display = function() {
@@ -90,6 +120,37 @@ function Person(x, y) {
   }
 }
 
+//obstacles
+function Obstacles(x,y)
+{
+  this.x = 1800;
+  this.y = windowHeight-250;
+  this.height = random(20,150);
+
+  this.collide = function(obj){
+
+		 //collide the cir object into this rectangle object.
+
+		if(this.hit){
+			this.color = color(0) //set this rectangle to be black if it gets hit
+		}
+
+	}
+  this.display = function()
+ {
+   fill(150);
+   rect(this.x,windowHeight-350+150-this.height,40,this.height);
+ }
+
+ this.update = function()
+ {
+   this.x = this.x-5;
+
+ }
+
+
+
+}
 
 // Ball class
 function Ball() {
