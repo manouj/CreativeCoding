@@ -17,8 +17,6 @@ person = new Person();
 
 function draw() {
   background(0);
-
-
   for (var i=0; i<balls.length; i++) {
     balls[i].move();
     balls[i].display();
@@ -30,7 +28,7 @@ function draw() {
   person.display();
   checkForShake();
 
-  var gravity = createVector(0,0.8);
+  var gravity = createVector(0,2);
   person.applyForce(gravity);
 
   if(isJump==true)
