@@ -24,8 +24,7 @@ person = new Person();
   }
 
   for(i=0;i<numRects;i++){
-    var h = random(10,150);
-		r = new rectObj(1600+(500*i),windowHeight-350+150-h, 30, h); // generate a rectObj
+		r = new rectObj(50*i,windowHeight-350, 30, random(10,50) ); // generate a rectObj
 		rects.push(r); //add it to the array.
 	}
 
@@ -99,7 +98,7 @@ console.log(hit);
 }
 //player
 function Person(x, y) {
-  this.pos = createVector(100, windowHeight-250);
+  this.pos = createVector(30, windowHeight-250);
   this.vel = createVector(0, 0);
   this.acc = createVector(0, 0);
   this.applyForce = function(force) {
@@ -176,10 +175,10 @@ function rectObj(x,y,w,h){
 	this.disp = function(){
 		noStroke();
 		fill(this.color);
-		this.x -= 3 //move to the right!
-		// if(this.x < 0){ //loop to the left!
-		// 	this.x = 1600;
-		// }
+		this.x += 3 //move to the right!
+		if(this.x > width){ //loop to the left!
+			this.x = -this.w;
+		}
 		rect(this.x,this.y,this.w,this.h);
 
 	}
@@ -275,6 +274,7 @@ function checkForShake() {
       balls[i].stopShake();
       balls[i].turn();
       balls[i].move();
+
     }
   }
 }
