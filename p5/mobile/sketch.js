@@ -152,7 +152,7 @@ function checkForShake() {
     for (var i=0; i<balls.length; i++) {
       balls[i].shake();
       balls[i].turn();
-      var jump = createVector(0,-8);
+      var jump = createVector(0,-2);
       person.applyForce(jump);
     }
   }
