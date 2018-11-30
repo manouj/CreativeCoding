@@ -15,22 +15,36 @@ person = new Person();
 
 function draw() {
   background(0);
-  person.update();
-  person.edges();
-  person.display();
+
 
   for (var i=0; i<balls.length; i++) {
     balls[i].move();
     balls[i].display();
   }
+
   rect(0,windowHeight-200,windowWidth,200 );
+  person.update();
+  person.edges();
+  person.display();
   checkForShake();
+
+  var gravity = createVector(0,0.1);
+  person.applyForce(gravity);
+
 
  }
 
+ function keyPressed()
+ {
+   if (key=='q') {
+
+       var jump = createVector(0,-8);
+       person.applyForce(jump);
+     }
+}
 //player
 function Person(x, y) {
-  this.pos = createVector(200, 380);
+  this.pos = createVector(30, windowHeight-250);
   this.vel = createVector(0, 0);
   this.acc = createVector(0, 0);
   this.applyForce = function(force) {
@@ -46,14 +60,14 @@ function Person(x, y) {
   this.display = function() {
     fill("blue");
     // image(selectedPlayer,this.pos.x,this.pos.y-80,80,80);
-    rect(30,windowHeight-250,20,50);
+    rect(this.pos.x,this.pos.y,20,50);
 
   }
 
   this.edges = function() {
-    if (this.pos.y > 380) {
+    if (this.pos.y > windowHeight-250) {
       this.vel.y *= 0;
-      this.pos.y = 380;
+      this.pos.y = windowHeight-250;
     }
 
     if (this.pos.y < 50) {
@@ -134,10 +148,11 @@ function checkForShake() {
   accChangeY = abs(accelerationY - pAccelerationY);
   accChangeT = accChangeX + accChangeY;
   // If shake
-  if (accChangeT >= threshold) {
+  if (accChangeT >= threshold||key=='p') {
     for (var i=0; i<balls.length; i++) {
       balls[i].shake();
       balls[i].turn();
+      var jump = createVector(0,-8);
       person.applyForce(jump);
     }
   }
