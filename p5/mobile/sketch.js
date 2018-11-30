@@ -6,6 +6,8 @@ var accChangeT = 0;
 var player;
 var isJump;
 
+
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
 person = new Person();
@@ -160,10 +162,11 @@ function checkForShake() {
   accChangeT = accChangeX + accChangeY;
   // If shake
   if (accChangeT >= threshold||key=='p') {
+    isJump=true;
     for (var i=0; i<balls.length; i++) {
       balls[i].shake();
       balls[i].turn();
-    isJump=true;
+
     }
   }
   // If not shake
