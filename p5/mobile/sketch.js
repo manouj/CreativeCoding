@@ -44,7 +44,7 @@ function draw() {
  {
    var jump = createVector(0,-20);
    person.applyForce(jump);
-   
+   isJump=false;
  }
 
  function keyPressed()
