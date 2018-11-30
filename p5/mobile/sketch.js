@@ -28,7 +28,7 @@ function draw() {
   person.display();
   checkForShake();
 
-  var gravity = createVector(0,0.5);
+  var gravity = createVector(0,0.8);
   person.applyForce(gravity);
 
 
