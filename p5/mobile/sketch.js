@@ -162,7 +162,7 @@ function checkForShake() {
   accChangeT = accChangeX + accChangeY;
   // If shake
   if (accChangeT >= threshold||key=='p') {
-    if(Person.pos.y==windowHeight-250)
+    if(person.pos.y==windowHeight-250)
     {
         isJump=true;
     }
