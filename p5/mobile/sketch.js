@@ -51,7 +51,7 @@ function draw() {
  {
    if (key=='q') {
 
-       var jump = createVector(0,-8);
+       var jump = createVector(0,-20);
        person.applyForce(jump);
      }
 }
@@ -162,7 +162,11 @@ function checkForShake() {
   accChangeT = accChangeX + accChangeY;
   // If shake
   if (accChangeT >= threshold||key=='p') {
-    isJump=true;
+    if(Person.pos.y==windowHeight-250)
+    {
+        isJump=true;
+    }
+
     for (var i=0; i<balls.length; i++) {
       balls[i].shake();
       balls[i].turn();
