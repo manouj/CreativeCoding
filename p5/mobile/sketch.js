@@ -9,15 +9,23 @@ var interval = 2000;
 var prevMillis = 0;
 var hit = false;
 var isHit=false;
-var obstacles=[];
+
+var score;
+
 var person;
 
 var rects = [];
-var numRects = 5;
+var numRects = 10;
+
+
+function preload(){
+player = loadImage("assets/player.png");
+}
 
 function setup()
  {
   createCanvas(windowWidth, windowHeight);
+  score = numRects;
 person = new Person();
   for (var i=0; i<20; i++) {
     balls.push(new Ball());
@@ -29,13 +37,12 @@ person = new Person();
 		rects.push(r); //add it to the array.
 	}
 
-
   isJump=false;
 
 }
 
 function draw() {
-  background(0);
+  background(220);
   for (var i=0; i<balls.length; i++) {
     balls[i].move();
     balls[i].display();
@@ -44,31 +51,14 @@ function draw() {
   for(i=0;i<numRects;i++){
   		rects[i].disp();
   		rects[i].collide( person ); //collide against the circle object
+
+
   	}
-
-
 
   rect(0,windowHeight-200,windowWidth,200 );
   person.update();
   person.edges();
   person.display();
-
-  if(millis() - prevMillis >interval && obstacles.length<=5)
-  {
-    obstacles.push(new Obstacles());
-    prevMillis = millis();
-    hit = collideRectRect(obstacles.x,obstacles.y,40,obstacles.height,mouseX,mouseY,75,75);
-  }
-
-  for(var j=0; j< obstacles.length; j++)
-  {
-    obstacles[j].display();
-    obstacles[j].update();
-    // hit = collideRectRect(obstacles[j].x,obstacles[j].y,40,obstacles[j].height,mouseX,mouseY,75,75);
-  }
-console.log(hit);
-
-
 
 
   checkForShake();
@@ -81,8 +71,26 @@ console.log(hit);
     playerJump();
   }
 
- }
+  if(isHit==true)
+  {
+    reduceScore();
+    isHit=false;
+  }
 
+  fill(255)
+
+  textSize(24);
+  text(score, windowWidth-windowWidth/6,80);
+
+if(rects[numRects-1].x<0)
+{
+  console.log("end of game");
+}
+
+
+
+ }
+//end of draw fn
  function playerJump()
  {
    var jump = createVector(0,-40);
@@ -110,14 +118,13 @@ function Person(x, y) {
     this.vel.add(this.acc);
     this.pos.add(this.vel);
     this.acc.set(0, 0);
-
   }
 
   this.display = function() {
     fill("blue");
     // image(selectedPlayer,this.pos.x,this.pos.y-80,80,80);
-    rect(this.pos.x,this.pos.y,20,50);
-
+    image(player,this.pos.x,this.pos.y);
+    // rect(this.pos.x,this.pos.y,80,50);
   }
 
   this.edges = function() {
@@ -130,31 +137,12 @@ function Person(x, y) {
       this.vel.y *= 0;
       this.pos.y = 50;
     }
+
   }
 }
 
-//obstacles
-function Obstacles(x,y)
-{
-  this.x = 1800;
-  this.y = windowHeight-250;
-  this.height = random(20,150);
 
-
-  this.display = function()
- {
-   fill(150);
-   rect(this.x,windowHeight-350+150-this.height,40,this.height);
-   hit = collideRectRect(this.x,this.y,40,this.height,mouseX,mouseY,75,75);
- }
-
- this.update = function()
- {
-   this.x = this.x-5;
-
- }
-}
-//new Obstacles
+//Obstacles
 function rectObj(x,y,w,h){
 	this.x = x;
 	this.y = y
@@ -162,16 +150,25 @@ function rectObj(x,y,w,h){
 	this.h = h
 	this.color = color(random(255),random(255),random(255))
 	this.hit = false;
+  this.gate = false;
 
 	this.collide = function(person){
 
 		this.hit = collideRectRect(this.x, this.y, this.w, this.h, person.pos.x, person.pos.y, 20,50); //collide the cir object into this rectangle object.
+if(this.gate == false)
+{
+		if(this.hit==true){
+			this.color = "red";
 
-		if(this.hit){
-			this.color = color(0) //set this rectangle to be black if it gets hit
+      isHit=true;
+      this.gate = true;
 		}
+}
+
 
 	}
+
+
 
 	this.disp = function(){
 		noStroke();
@@ -186,6 +183,11 @@ function rectObj(x,y,w,h){
 
 }
 
+//reduceScore
+function reduceScore()
+{
+score--;
+}
 // Ball class
 function Ball() {
   this.x = random(width);
@@ -265,7 +267,6 @@ function checkForShake() {
     for (var i=0; i<balls.length; i++) {
       balls[i].shake();
       balls[i].turn();
-
     }
   }
   // If not shake
