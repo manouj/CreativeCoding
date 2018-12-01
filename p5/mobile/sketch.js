@@ -1,5 +1,5 @@
 var balls = [];
-var threshold = 30;
+var threshold = 15;
 var accChangeX = 0;
 var accChangeY = 0;
 var accChangeT = 0;
