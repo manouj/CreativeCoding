@@ -19,6 +19,9 @@ var gameStart=true;
 function setup()
  {
   createCanvas(windowWidth, windowHeight);
+  input = createInput();
+    input.position(20, 65);
+
   score = numRects;
 person = new Person();
   for (var i=0; i<20; i++) {
@@ -86,7 +89,8 @@ if(rects[numRects-1].x<0)
 
 if(gameStart==true)
 {
-  // rect(20,20,windowWidth-40,windowHeight-40);
+  rect(20,20,windowWidth-40,windowHeight-40);
+
 }
 
 
