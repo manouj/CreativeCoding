@@ -21,6 +21,8 @@ function setup()
   createCanvas(windowWidth, windowHeight);
   input = createInput();
     input.position(20, 65);
+    input.size(200,100);
+
 
   score = numRects;
 person = new Person();
