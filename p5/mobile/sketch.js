@@ -5,6 +5,7 @@ var accChangeY = 0;
 var accChangeT = 0;
 var player;
 var isJump;
+var speed = 6;
 var interval = 2000;
 var prevMillis = 0;
 var hit = false;
@@ -13,9 +14,7 @@ var score;
 var person;
 var rects = [];
 var numRects = 10;
-
-
-
+var gameStart=true;
 
 function setup()
  {
@@ -72,16 +71,23 @@ function draw() {
     isHit=false;
   }
 
-  fill(255)
-
-  textSize(24);
-  text(score, windowWidth-windowWidth/6,80);
+  fill("#3c3c3c")
+  text("Health", windowWidth/2-100,windowHeight/3-200);
+  textSize(windowWidth/10);
+  text(score, windowWidth/2-50,windowHeight/3);
 
 if(rects[numRects-1].x<0)
 {
   console.log("end of game");
 }
 
+
+//game start screen
+
+if(gameStart==true)
+{
+  // rect(20,20,windowWidth-40,windowHeight-40);
+}
 
 
  }
@@ -178,7 +184,7 @@ if(this.gate == false)
 	this.disp = function(){
 		noStroke();
 		fill(this.color);
-		this.x -= 6 //move to the right!
+		this.x -= speed //move to the right!
 		// if(this.x < 0){ //loop to the left!
 		// 	this.x = 1600;
 		// }
