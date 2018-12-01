@@ -18,9 +18,9 @@ var rects = [];
 var numRects = 10;
 
 
-function preload(){
-player = loadImage("assets/player.png");
-}
+// function preload(){
+// player = loadImage("assets/player.png");
+// }
 
 function setup()
  {
