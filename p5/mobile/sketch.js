@@ -9,11 +9,8 @@ var interval = 2000;
 var prevMillis = 0;
 var hit = false;
 var isHit=false;
-
 var score;
-
 var person;
-
 var rects = [];
 var numRects = 10;
 
@@ -183,7 +180,7 @@ if(this.gate == false)
 	this.disp = function(){
 		noStroke();
 		fill(this.color);
-		this.x -= 3 //move to the right!
+		this.x -= 6 //move to the right!
 		// if(this.x < 0){ //loop to the left!
 		// 	this.x = 1600;
 		// }
