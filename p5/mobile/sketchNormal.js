@@ -264,15 +264,14 @@ function checkForShake() {
   accChangeT = accChangeX + accChangeY;
   // If shake
   if (accChangeT >= threshold||key=='p') {
-
+    if(person.pos.y==windowHeight-250)
+    {
+        isJump=true;
+    }
 
     for (var i=0; i<balls.length; i++) {
       balls[i].shake();
       balls[i].turn();
-      if(person.pos.y==windowHeight-250)
-      {
-          isJump=true;
-      }
     }
   }
   // If not shake
