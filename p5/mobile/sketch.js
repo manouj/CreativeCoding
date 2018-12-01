@@ -5,7 +5,7 @@ var accChangeY = 0;
 var accChangeT = 0;
 var player;
 var isJump;
-var speed = 6;
+var speed =2 ;
 var interval = 2000;
 var prevMillis = 0;
 var hit = false;
@@ -13,15 +13,21 @@ var isHit=false;
 var score;
 var person;
 var rects = [];
-var numRects = 10;
-var gameStart=true;
+var numRects = 30;
 
+//pages
+var gameStart=true;
+var gameEnd;
+var instructions;
+
+//difficulties
+var kidMode;
+var intermediate;
+var legend;
 function setup()
  {
   createCanvas(windowWidth, windowHeight);
-  input = createInput();
-    input.position(20, 65);
-    input.size(200,100);
+
 
 
   score = numRects;
@@ -42,6 +48,28 @@ person = new Person();
 
 function draw() {
   background(220);
+  kidMode=true;
+  intermediate=false;
+  legend=false;
+
+  //difficulties
+  if(kidMode)
+  {
+    numRects = 10;
+    speed=6;
+  }
+
+  if(intermediate)
+  {
+    numRects = 25;
+    speed=8;
+  }
+
+  if(legend)
+  {
+    numRects = 40;
+    speed=10;
+  }
   for (var i=0; i<balls.length; i++) {
     balls[i].move();
     balls[i].display();
@@ -89,11 +117,42 @@ if(rects[numRects-1].x<0)
 
 //game start screen
 
-if(gameStart==true)
+if(gameStart==false)
 {
   rect(20,20,windowWidth-40,windowHeight-40);
+  fill(220);
+  rect(30,30,windowWidth-60,windowHeight/3-50);
+  fill(170)
+  rect(30,30+windowHeight/3-40,windowWidth-60,windowHeight/3-10);
+  fill(120)
+  rect(30,2*windowHeight/3-10,windowWidth-60,windowHeight/3-10);
+
+  fill("#3c3c3c")
+  textAlign(CENTER, CENTER);
+  text("Kid Mode", windowWidth/2,windowHeight/3-windowHeight/6);
+  textSize(windowWidth/10);
+
+  textAlign(CENTER, CENTER);
+  text("Intermediate", windowWidth/2,windowHeight/2);
+  textSize(windowWidth/10);
+
+  textAlign(CENTER, CENTER);
+  text("Legend Mode", windowWidth/2,2*windowHeight/3+windowHeight/6);
+  textSize(windowWidth/10);
 
 }
+
+
+if(gameEnd)
+{
+
+}
+
+if(instructions)
+{
+
+}
+
 
 
  }
