@@ -1,5 +1,5 @@
 var balls = [];
-var threshold = 30;
+var threshold = 10;
 var accChangeX = 0;
 var accChangeY = 0;
 var accChangeT = 0;
@@ -264,24 +264,23 @@ function checkForShake() {
   accChangeT = accChangeX + accChangeY;
   // If shake
   if (accChangeT >= threshold||key=='p') {
-
+    if(person.pos.y==windowHeight-250)
+    {
+        isJump=true;
+    }
 
     for (var i=0; i<balls.length; i++) {
       balls[i].shake();
       balls[i].turn();
-
-          isJump=true;
-
     }
   }
   // If not shake
   else {
-
+    isJump=false;
     for (var i=0; i<balls.length; i++) {
       balls[i].stopShake();
       balls[i].turn();
       balls[i].move();
-      isJump=false;
     }
   }
 }
