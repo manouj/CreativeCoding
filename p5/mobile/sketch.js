@@ -54,7 +54,7 @@ function draw() {
 
 
   	}
-
+    fill(60)
   rect(0,windowHeight-200,windowWidth,200 );
   person.update();
   person.edges();
@@ -121,10 +121,20 @@ function Person(x, y) {
   }
 
   this.display = function() {
-    fill("blue");
+
     // image(selectedPlayer,this.pos.x,this.pos.y-80,80,80);
-    image(player,this.pos.x,this.pos.y);
-    // rect(this.pos.x,this.pos.y,80,50);
+    // image(player,this.pos.x+200,this.pos.y);
+      fill(000);
+    rect(this.pos.x,this.pos.y-10,50,50);
+    rect(this.pos.x+10,this.pos.y+40,10,10);
+    rect(this.pos.x+30,this.pos.y+40,10,10);
+
+  fill("#ffc69c")
+  rect(this.pos.x+10,this.pos.y-2,38,15);
+
+  fill(000);
+  rect(this.pos.x+20,this.pos.y-1,8,8);
+  rect(this.pos.x+38,this.pos.y-1,8,8);
   }
 
   this.edges = function() {
@@ -154,7 +164,7 @@ function rectObj(x,y,w,h){
 
 	this.collide = function(person){
 
-		this.hit = collideRectRect(this.x, this.y, this.w, this.h, person.pos.x, person.pos.y, 20,50); //collide the cir object into this rectangle object.
+		this.hit = collideRectRect(this.x, this.y, this.w, this.h, person.pos.x+20, person.pos.y, 20,50); //collide the cir object into this rectangle object.
 if(this.gate == false)
 {
 		if(this.hit==true){
