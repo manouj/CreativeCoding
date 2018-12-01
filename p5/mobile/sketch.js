@@ -11,9 +11,10 @@ var prevMillis = 0;
 var hit = false;
 var isHit=false;
 var score;
+var hitScore =0;
 var person;
 var rects = [];
-var numRects = 30;
+var numRects = 50;
 
 //pages
 var gameStart=true;
@@ -24,13 +25,12 @@ var instructions;
 var kidMode;
 var intermediate;
 var legend;
+
+
 function setup()
  {
   createCanvas(windowWidth, windowHeight);
 
-
-
-  score = numRects;
 person = new Person();
   for (var i=0; i<20; i++) {
     balls.push(new Ball());
@@ -41,6 +41,29 @@ person = new Person();
 		r = new rectObj(1600+(500*i),windowHeight-350+150-h, 30, h); // generate a rectObj
 		rects.push(r); //add it to the array.
 	}
+  kidMode=false;
+  intermediate=false;
+  legend=false;
+  // if(kidMode)
+  // {
+  //   numRects = 10;
+  //   speed=6;
+  //
+  // }
+  //
+  // if(intermediate)
+  // {
+  //   numRects = 25;
+  //   speed=8;
+  // }
+  //
+  // if(legend)
+  // {
+  //   numRects = 40;
+  //   speed=10;
+  // }
+
+
 
   isJump=false;
 
@@ -48,28 +71,10 @@ person = new Person();
 
 function draw() {
   background(220);
-  kidMode=true;
-  intermediate=false;
-  legend=false;
 
-  //difficulties
-  if(kidMode)
-  {
-    numRects = 10;
-    speed=6;
-  }
 
-  if(intermediate)
-  {
-    numRects = 25;
-    speed=8;
-  }
 
-  if(legend)
-  {
-    numRects = 40;
-    speed=10;
-  }
+
   for (var i=0; i<balls.length; i++) {
     balls[i].move();
     balls[i].display();
@@ -113,11 +118,13 @@ if(rects[numRects-1].x<0)
 {
   console.log("end of game");
 }
-
+fill("red")
+rect(40,40,(windowWidth-80),20);
+fill(25)
+rect(40,40,(windowWidth-80)*score/numRects,20);
 
 //game start screen
-
-if(gameStart==false)
+if(gameStart==true)
 {
   rect(20,20,windowWidth-40,windowHeight-40);
   fill(220);
@@ -155,8 +162,70 @@ if(instructions)
 
 
 
+
+if(kidMode)
+{
+kidmodefn();
+
+}
+
+if(intermediate)
+{
+intermediatefn();
+}
+
+if(legend)
+{
+legendfn();
+}
+
+
  }
 //end of draw fn
+
+//kidnmodefn
+function kidmodefn()
+{
+  numRects = 10;
+  speed=6;
+  kidMode=false;
+    score=numRects;
+}
+function intermediatefn()
+{
+  numRects = 25;
+  speed=8;
+  intermediate=false;
+  score=numRects;
+}
+function legendfn()
+{
+  numRects = 40;
+  speed=10;
+  legend=false;
+    score=numRects;
+}
+
+
+//modeSelect
+// When the user clicks the mouse
+function mousePressed() {
+if(mouseY<windowHeight/3-50)
+{
+  kidMode=true;
+  gameStart=false;
+}
+if(mouseY>windowHeight/3-50 && mouseY<2*windowHeight/3-10)
+{
+  intermediate=true;
+  gameStart=false;
+}
+if(mouseY>2*windowHeight/3)
+{
+  legend=true;
+  gameStart=false;
+}
+}
  function playerJump()
  {
    var jump = createVector(0,-40);
@@ -235,7 +304,7 @@ if(this.gate == false)
 {
 		if(this.hit==true){
 			this.color = "red";
-
+      hitScore++;
       isHit=true;
       this.gate = true;
 		}
@@ -274,7 +343,6 @@ function Ball() {
   this.oxspeed = this.xspeed;
   this.oyspeed = this.yspeed;
   this.direction = 0.7;
-
   this.move = function() {
     this.x += this.xspeed * this.direction;
     this.y += this.yspeed * this.direction;
