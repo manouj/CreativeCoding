@@ -72,9 +72,9 @@ function draw() {
   }
 
   fill("#3c3c3c")
-  text("Health", windowWidth/2-100,windowHeight/3-200);
+  text("Health", windowWidth/2-150,windowHeight/3-200);
   textSize(windowWidth/10);
-  text(score, windowWidth/2-50,windowHeight/3);
+  text(score, windowWidth/2-70,windowHeight/3);
 
 if(rects[numRects-1].x<0)
 {
