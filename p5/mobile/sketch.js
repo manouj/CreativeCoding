@@ -448,11 +448,12 @@ function checkForShake() {
   }
   // If not shake
   else {
-    isJump=false;
+
     for (var i=0; i<balls.length; i++) {
       balls[i].stopShake();
       balls[i].turn();
       balls[i].move();
+      isJump=false;
     }
   }
 }
