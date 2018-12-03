@@ -17,6 +17,7 @@ var rects = [];
 var numRects = 50;
 
 //pages
+var inGame=false;
 var gameStart=true;
 var gameEnd;
 var instructions;
@@ -73,8 +74,9 @@ function draw() {
   background(220);
 
 
-
-
+//gameScreen
+if(inGame==true)
+{
   for (var i=0; i<balls.length; i++) {
     balls[i].move();
     balls[i].display();
@@ -114,15 +116,12 @@ function draw() {
   textSize(windowWidth/10);
   text(score, windowWidth/2-70,windowHeight/3);
 
-if(rects[numRects-1].x<0)
-{
-  console.log("end of game");
-}
+
 fill("red")
 rect(40,40,(windowWidth-80),20);
 fill(25)
 rect(40,40,(windowWidth-80)*score/numRects,20);
-
+}
 //game start screen
 if(gameStart==true)
 {
@@ -149,10 +148,28 @@ if(gameStart==true)
 
 }
 
+if(rects[numRects-1].x<0)
+{
+  console.log("end of game");
+  gameEnd=true;
+  // inGame=false;
+}
 
 if(gameEnd)
 {
+  fill(170)
+  rect(30,30+windowHeight/3-40,windowWidth-60,windowHeight/3-10);
+  fill(20)
+  textSize(windowWidth/10);
+  text("Good Job", windowWidth/2,windowHeight/2);
+  textSize(windowWidth/20);
+  text("You vaulted over "+score+" of "+numRects+" obstacles", windowWidth/2+40,windowHeight/2+80);
 
+  text("Swipe down to retry", windowWidth/2+40,windowHeight/2+220);
+  // inGame=false;
+  // gameStart=true;
+  //
+  // gameEnd=false;
 }
 
 if(instructions)
@@ -160,7 +177,7 @@ if(instructions)
 
 }
 
-
+//difficulty selection screen
 
 
 if(kidMode)
@@ -178,9 +195,8 @@ if(legend)
 {
 legendfn();
 }
+}
 
-
- }
 //end of draw fn
 
 //kidnmodefn
@@ -190,13 +206,15 @@ function kidmodefn()
   speed=6;
   kidMode=false;
     score=numRects;
+    inGame=true;
 }
 function intermediatefn()
 {
   numRects = 25;
-  speed=8;
+  speed=10;
   intermediate=false;
   score=numRects;
+    inGame=true;
 }
 function legendfn()
 {
@@ -204,12 +222,17 @@ function legendfn()
   speed=10;
   legend=false;
     score=numRects;
+      inGame=true;
+
+
 }
 
 
 //modeSelect
 // When the user clicks the mouse
 function mousePressed() {
+  if(gameStart)
+  {
 if(mouseY<windowHeight/3-50)
 {
   kidMode=true;
@@ -226,6 +249,9 @@ if(mouseY>2*windowHeight/3)
   gameStart=false;
 }
 }
+
+}
+
  function playerJump()
  {
    var jump = createVector(0,-40);
@@ -335,6 +361,7 @@ score--;
 }
 // Ball class
 function Ball() {
+
   this.x = random(width);
   this.y = random(height);
   this.diameter = random(10, 30);
@@ -392,6 +419,7 @@ function Ball() {
   };
 
   this.display = function() {
+    fill(180)
     ellipse(this.x, this.y, this.diameter, this.diameter);
   };
 }
@@ -403,14 +431,19 @@ function checkForShake() {
   accChangeT = accChangeX + accChangeY;
   // If shake
   if (accChangeT >= threshold||key=='p') {
-    if(person.pos.y==windowHeight-250)
+    if(person.pos.y==windowHeight-250 && legend!=true)
     {
         isJump=true;
     }
 
+
     for (var i=0; i<balls.length; i++) {
       balls[i].shake();
       balls[i].turn();
+      if(legend==true)
+      {
+          isJump=true;
+      }
     }
   }
   // If not shake
