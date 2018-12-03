@@ -254,15 +254,25 @@ if(mouseY>2*windowHeight/3)
 
  function playerJump()
  {
-   var jump = createVector(0,-20);
-   person.applyForce(jump);
-   isJump=false;
+   if(numRects==40)
+   {
+     var jump = createVector(0,-40);
+     person.applyForce(jump);
+     isJump=false;
+   }
+
+   if(numRects==40)
+   {
+     var jump = createVector(0,-10);
+     person.applyForce(jump);
+     isJump=false;
+   }
  }
 
  function keyPressed()
  {
    if (key=='q') {
-       var jump = createVector(0,-20);
+       var jump = createVector(0,-40);
        person.applyForce(jump);
      }
 }
