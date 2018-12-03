@@ -254,12 +254,11 @@ if(mouseY>2*windowHeight/3)
 
  function playerJump()
  {
-   if(numRects!=40)
-   {
+
      var jump = createVector(0,-40);
      person.applyForce(jump);
      isJump=false;
-   }
+  
 
    if(numRects==40)
    {
