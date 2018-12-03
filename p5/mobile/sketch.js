@@ -440,7 +440,7 @@ function checkForShake() {
     for (var i=0; i<balls.length; i++) {
       balls[i].shake();
       balls[i].turn();
-      if(legend==true)
+      if(numRects==40)
       {
           isJump=true;
       }
