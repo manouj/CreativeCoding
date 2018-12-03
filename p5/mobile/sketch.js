@@ -254,7 +254,7 @@ if(mouseY>2*windowHeight/3)
 
  function playerJump()
  {
-   var jump = createVector(0,-40);
+   var jump = createVector(0,-20);
    person.applyForce(jump);
    isJump=false;
  }
@@ -262,7 +262,7 @@ if(mouseY>2*windowHeight/3)
  function keyPressed()
  {
    if (key=='q') {
-       var jump = createVector(0,-40);
+       var jump = createVector(0,-20);
        person.applyForce(jump);
      }
 }
