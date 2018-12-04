@@ -223,7 +223,7 @@ function legendfn()
   legend=false;
     score=numRects;
       inGame=true;
-
+      threshold = 20;
 
 }
 
@@ -258,7 +258,7 @@ if(mouseY>2*windowHeight/3)
      var jump = createVector(0,-40);
      person.applyForce(jump);
      isJump=false;
-  
+
 
    if(numRects==40)
    {
