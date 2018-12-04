@@ -262,7 +262,7 @@ if(mouseY>2*windowHeight/3)
 
    if(numRects==40)
    {
-     var jump = createVector(0,-15);
+     var jump = createVector(0,-5);
      person.applyForce(jump);
      isJump=false;
    }
