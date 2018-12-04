@@ -27,11 +27,16 @@ var kidMode;
 var intermediate;
 var legend;
 
+//sounds
+var hitSound;
+var jumpSound;
+
 
 function setup()
  {
   createCanvas(windowWidth, windowHeight);
-
+hitSound = loadSound('assets/uhho.wav');
+jumpSound = loadSound('assets/jump.wav');
 person = new Person();
   for (var i=0; i<20; i++) {
     balls.push(new Ball());
@@ -85,8 +90,6 @@ if(inGame==true)
   for(i=0;i<numRects;i++){
   		rects[i].disp();
   		rects[i].collide( person ); //collide against the circle object
-
-
   	}
     fill(60)
   rect(0,windowHeight-200,windowWidth,200 );
@@ -103,6 +106,7 @@ if(inGame==true)
   if(isJump==true)
   {
     playerJump();
+
   }
 
   if(isHit==true)
@@ -258,7 +262,7 @@ if(mouseY>2*windowHeight/3)
      var jump = createVector(0,-40);
      person.applyForce(jump);
      isJump=false;
-
+     jumpSound.play();
 
    if(numRects==40)
    {
@@ -328,7 +332,7 @@ function rectObj(x,y,w,h){
 	this.y = y
 	this.w = w
 	this.h = h
-	this.color = color(random(255),random(255),random(255))
+	this.color = 000;
 	this.hit = false;
   this.gate = false;
 
@@ -338,6 +342,7 @@ function rectObj(x,y,w,h){
 if(this.gate == false)
 {
 		if(this.hit==true){
+      hitSound.play();
 			this.color = "red";
       hitScore++;
       isHit=true;
