@@ -139,20 +139,16 @@ if(gameStart==true)
 
   fill("#3c3c3c")
   textAlign(CENTER, CENTER);
-  textSize(windowWidth/10);
   text("Kid Mode", windowWidth/2,windowHeight/3-windowHeight/6);
-
+  textSize(windowWidth/10);
 
   textAlign(CENTER, CENTER);
-    textSize(windowWidth/10);
   text("Intermediate", windowWidth/2,windowHeight/2);
-
+  textSize(windowWidth/10);
 
   textAlign(CENTER, CENTER);
-    textSize(windowWidth/10);
   text("Legend Mode", windowWidth/2,2*windowHeight/3+windowHeight/6);
-textSize(windowWidth/20);
-  text("Beta", windowWidth/2,2*windowHeight/3+40+windowHeight/6);
+  textSize(windowWidth/10);
 
 }
 
