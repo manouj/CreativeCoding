@@ -149,7 +149,8 @@ if(gameStart==true)
   textAlign(CENTER, CENTER);
   text("Legend Mode", windowWidth/2,2*windowHeight/3+windowHeight/6);
   textSize(windowWidth/10);
-
+  text("Beta", windowWidth/2,2*windowHeight/3+40+windowHeight/6);
+  textSize(windowWidth/20);
 }
 
 if(rects[numRects-1].x<0)
