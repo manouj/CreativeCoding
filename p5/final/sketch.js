@@ -163,7 +163,7 @@ if(rects[numRects-1].x<0)
 if(gameEnd)
 {
   fill(170)
-  rect(30,30+windowHeight/3-40,windowWidth-60,windowHeight/3-10);
+rect(30,30,windowWidth-60,windowHeight-60);
   fill(20)
   textSize(windowWidth/10);
   text("Good Job", windowWidth/2,windowHeight/2);
