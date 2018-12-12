@@ -257,7 +257,7 @@ function legendfn()
 // When the user clicks the mouse
 function mousePressed() {
 
-  if(gameStart)
+  if(gameStart==true && instructions ==false)
   {
 if(mouseY<windowHeight/3-50)
 {
