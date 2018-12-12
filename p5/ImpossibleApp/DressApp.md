@@ -1,7 +1,7 @@
 # DressApp
 
 ## Objective:
-DressApp enables the user to create/generate any dress of his choice - stitched to fit his form and structure.
+DressApp enables the user to create/generate any dress of his/her choice - stitched to fit his form and structure.
 
 ## Steps to operate:
 
