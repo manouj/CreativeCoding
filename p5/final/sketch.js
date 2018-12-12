@@ -16,9 +16,11 @@ var person;
 var rects = [];
 var numRects = 50;
 
+var instructions=true;
+
 //pages
 var inGame=false;
-var gameStart=true;
+var gameStart=false;
 var gameEnd;
 var instructions;
 
@@ -34,7 +36,7 @@ var jumpSound;
 
 function setup()
  {
-  createCanvas(windowWidth, windowHeight);
+createCanvas(windowWidth, windowHeight);
 hitSound = loadSound('assets/uhho.wav');
 jumpSound = loadSound('assets/jump.wav');
 person = new Person();
@@ -78,7 +80,7 @@ person = new Person();
 function draw() {
   background(220);
 
-
+//
 //gameScreen
 if(inGame==true)
 {
@@ -176,9 +178,28 @@ if(gameEnd)
   // gameEnd=false;
 }
 
-if(instructions)
-{
+if(instructions==true)
+{  fill(000)
+  textSize(windowWidth/10);
+  text("Ninja Skipper", windowWidth/2-250,windowHeight/3);
+  textSize(windowWidth/20);
+  text("'Jump' to save our baby ninja!", windowWidth/2-280,windowHeight/3+80);
+  fill(120)
+rect(10, windowHeight/2-80,windowWidth-20,windowHeight/2-80)
+  fill(000)
+  textSize(windowWidth/15);
+  text("Instructions", windowWidth/2-150,windowHeight/2);
+  textSize(windowWidth/25);
 
+  text("1. Hold your phone straight up.", 40,windowHeight/2+80);
+  text("2. Literally jump when you see an obstacle.", 40,windowHeight/2+160);
+  text("3. Your jumps will make the ninja jump .", 40,windowHeight/2+240);
+
+  fill(20)
+  rect(windowWidth/2-130,windowHeight/2+320,300,90);
+    fill(180)
+  textSize(windowWidth/20);
+  text("Click to start", windowWidth/2-120,windowHeight/2+380);
 }
 
 //difficulty selection screen
@@ -235,6 +256,7 @@ function legendfn()
 //modeSelect
 // When the user clicks the mouse
 function mousePressed() {
+
   if(gameStart)
   {
 if(mouseY<windowHeight/3-50)
@@ -252,6 +274,13 @@ if(mouseY>2*windowHeight/3)
   legend=true;
   gameStart=false;
 }
+}
+
+if(gameStart==false && instructions==true)
+{
+  gameStart=true;
+  instructions=false;
+  inGame=false;
 }
 
 }
