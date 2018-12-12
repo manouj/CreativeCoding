@@ -15,14 +15,13 @@ var hitScore =0;
 var person;
 var rects = [];
 var numRects = 50;
-
 var instructions=true;
 
 //pages
 var inGame=false;
 var gameStart=false;
 var gameEnd;
-var instructions;
+
 
 //difficulties
 var kidMode;
@@ -257,7 +256,7 @@ function legendfn()
 // When the user clicks the mouse
 function mousePressed() {
 
-  if(gameStart==true && instructions ==false)
+  if(gameStart)
   {
 if(mouseY<windowHeight/3-50)
 {
